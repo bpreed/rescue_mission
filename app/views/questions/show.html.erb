@@ -1,0 +1,46 @@
+<h3>
+  <strong>Title:</strong>
+  <%= @question.title %>
+</h3>
+<br />
+
+<h4>
+  <strong>Description:</strong>
+  <br />
+  <%= @question.description %>
+</h4>
+<br />
+<br />
+<h4>New Answer</h4>
+
+<%= form_for [@question, @answer] do |f| %>
+  <% if @answer.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+      <% @answer.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+
+  <%= f.submit %>
+<% end %>
+
+<%= link_to 'Edit', edit_question_path(@question) %> |
+<%= link_to 'Destroy', @question, method: :delete, data: {confirm: 'Are you sure?'} %> |
+<%= link_to 'Back', questions_path %>
+
+<p>
+  <% if @answers %>
+   <strong>Answers:</strong>
+    <ul>
+    <% @answers.each do |answer| %>
+      <li><%= answer.description %><br /></li>
+    <% end %>
+    </ul>
+  <% end %>
+</p>

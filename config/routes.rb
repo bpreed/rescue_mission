@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
   root 'homes#index'
   devise_for :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  resources :questions, except: [:show]
+
+  resources :questions, only: [:show] do
+    resources :answers, only: [:index, :create]
+  end
+
+
 end
